@@ -27,6 +27,6 @@ public class TemplateController {
 	public String helloJsp(Map<String, Object> map) {
 		map.put("hello", "say hello from thymeleaf template");
 		
-		return "helloJsp";
+		return "hello";
 	}
 }
