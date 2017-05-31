@@ -1,5 +1,6 @@
 package com.spring.boot.demo;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
@@ -8,7 +9,7 @@ import org.springframework.context.annotation.ImportResource;
 @SpringBootApplication 
 @ServletComponentScan // 加入Servlet
 @ImportResource(locations = { "classpath:application-bean.xml" }) // 加入xml配置
-// @MapperScan(basePackages = "com.spring.boot.demo.mapper") // 扫描mapper
+@MapperScan(basePackages = "com.spring.boot.demo.mapper") // 扫描mapper
 public class App {
 	/*
 	 * @Bean public ServletRegistrationBean MyServlet(){ //

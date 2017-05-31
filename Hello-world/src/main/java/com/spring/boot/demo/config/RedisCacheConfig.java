@@ -1,8 +1,11 @@
 package com.spring.boot.demo.config;
 
+import java.lang.reflect.Method;
+
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheManager;
@@ -11,6 +14,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+
+import com.spring.boot.demo.models.Student;
 
 /**
  * redis 缓存配置;
@@ -60,7 +65,7 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
 		redisTemplate.setKeySerializer(redisSerializer);
 	    redisTemplate.setHashKeySerializer(redisSerializer);
 	    
-	    Jackson2JsonRedisSerializer<Object> jacksonJsonRedisSerializer = new Jackson2JsonRedisSerializer<Object>(Object.class);
+	    Jackson2JsonRedisSerializer<Student> jacksonJsonRedisSerializer = new Jackson2JsonRedisSerializer<Student>(Student.class);
 	    redisTemplate.setValueSerializer(jacksonJsonRedisSerializer);
 
 		return redisTemplate;
@@ -70,7 +75,7 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
 	/**
 	 * 自定义key. 此方法将会根据类名+方法名+所有参数的值生成唯一的一个key,即使@Cacheable中的value属性一样，key也会不一样。
 	 */
-	/*@Override
+	@Override
 	public KeyGenerator keyGenerator() {
 		System.out.println("RedisCacheConfig.keyGenerator()");
 		return new KeyGenerator() {
@@ -86,5 +91,5 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
 				return sb.toString();
 			}
 		};
-	}*/
+	}
 }

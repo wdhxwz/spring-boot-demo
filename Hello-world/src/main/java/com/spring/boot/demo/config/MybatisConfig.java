@@ -1,10 +1,15 @@
 package com.spring.boot.demo.config;
 
+import java.util.Properties;
+
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import com.github.pagehelper.PageHelper;
 
 @Configuration
 public class MybatisConfig {
-	/*@Bean
+	@Bean
     public PageHelper pageHelper() {
         PageHelper pageHelper = new PageHelper();
         Properties p = new Properties();
@@ -14,5 +19,5 @@ public class MybatisConfig {
         pageHelper.setProperties(p);
         
         return pageHelper;
-    }*/
+    }
 }
