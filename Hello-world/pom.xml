@@ -30,6 +30,7 @@
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 
+
 		<!-- 重启部署依赖 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

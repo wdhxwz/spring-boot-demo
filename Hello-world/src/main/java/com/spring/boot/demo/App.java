@@ -8,7 +8,8 @@ import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication 
 @ServletComponentScan // 加入Servlet
-@ImportResource(locations = { "classpath:application-bean.xml","classpath:dubbo-consumer.xml" }) // 加入xml配置
+// ,"classpath:dubbo-consumer.xml"
+@ImportResource(locations = { "classpath:application-bean.xml" }) // 加入xml配置
 @MapperScan(basePackages = "com.spring.boot.demo.mapper") // 扫描mapper
 public class App {
 	/*
