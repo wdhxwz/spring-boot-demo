@@ -60,5 +60,6 @@ public class LogAspect {
 	public void doAfterReturning(JoinPoint joinPoint) {
 		// 处理完请求，返回内容
 		logger.info("WebLogAspect.doAfterReturning()");
+		logger.debug("this is a debug message");
 	}
 }
