@@ -19,6 +19,17 @@ public class ApiService {
 		return result;
 	}
 	
+//	@ServiceMethod(apiNo = "Api2003")
+//	public ServiceResult getAccount2(String aaa){
+//		ServiceResult result = new ServiceResult();
+//		System.out.println("开始执行Api2003");
+//		System.out.println(aaa);
+//		
+//		result.setMessage("请求Api2003成功");
+//		
+//		return result;
+//	}
+	
 	@ServiceMethod(apiNo = "Api2001",version="1.0",obsoleted = ObsoletedType.YES)
 	public ServiceResult getAccountByChannel(ApiRequest2001 request2001){
 		ServiceResult result = new ServiceResult();

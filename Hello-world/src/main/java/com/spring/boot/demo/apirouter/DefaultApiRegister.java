@@ -169,12 +169,12 @@ public class DefaultApiRegister implements ApiRegister {
 						// 参数处理,接口只能有一个参数,并且需要是@{ApiRequest}获取子类
 						if (method.getParameterTypes().length > 1) {
 							logger.error(method.getDeclaringClass().getName() + "." + method.getName() + "的入参只能是"
-									+ ApiRequest.class.getName() + "或无入参。");
+									+ ApiRequest.class.getName() + "或其子类或无入参。");
 						} else if (method.getParameterTypes().length == 1) {
 							Class<?> paramType = method.getParameterTypes()[0];
 							if (!ClassUtils.isAssignable(ApiRequest.class, paramType)) {
 								throw new ApiException(method.getDeclaringClass().getName() + "." + method.getName()
-										+ "的入参必须是" + ApiRequest.class.getName());
+										+ "的入参必须是" + ApiRequest.class.getName() + "或其子类");
 							}
 							boolean apiRequestImplType = !paramType.isAssignableFrom(ApiRequest.class);
 							serviceMethodHandler.setApiRequestImplType(apiRequestImplType);
