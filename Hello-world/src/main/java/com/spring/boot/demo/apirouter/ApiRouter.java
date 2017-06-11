@@ -4,12 +4,12 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URLDecoder;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.util.Assert;
-import org.springframework.util.StringUtils;
 
 import com.spring.boot.demo.utils.JsonUtils;
 
@@ -32,6 +32,11 @@ public class ApiRouter implements ApplicationContextAware {
 	 */
 	private ApiRegister apiRegister;
 
+	/**
+	 * 请求头验证器
+	 */
+	private RequestHeadValidator requestHeadValidator;
+
 	public ApiRegister getApiRegister() {
 		return apiRegister;
 	}
@@ -40,12 +45,18 @@ public class ApiRouter implements ApplicationContextAware {
 		this.applicationContext = applicationContext;
 	}
 
+	/**
+	 * 启动ApiRouter
+	 */
 	public void startup() {
 		if (logger.isInfoEnabled()) {
 			logger.info("开始启动ApiRouter...");
 		}
 		Assert.notNull(this.applicationContext, "Spring上下文不能为空");
 		apiRegister = new DefaultApiRegister(applicationContext);
+		if (null == requestHeadValidator) {
+			requestHeadValidator = new DefaultRequestHeadValidator(apiRegister);
+		}
 
 		if (logger.isInfoEnabled()) {
 			logger.info("ApiRouter启动成功！");
@@ -57,10 +68,12 @@ public class ApiRouter implements ApplicationContextAware {
 	 */
 	public ServiceResult service(String requestData) {
 		ServiceResult serviceResult = null;
+		
+		// 请求的时候,参数为"",这里接收到的数据为"\"\"",因此不为空
 		if (logger.isInfoEnabled()) {
 			logger.info("请求的数据：" + requestData);
 		}
-
+		
 		if (StringUtils.isEmpty(requestData)) {
 			serviceResult = new ServiceResult();
 			serviceResult.setCode("401");
@@ -78,56 +91,31 @@ public class ApiRouter implements ApplicationContextAware {
 			}
 		}
 
-		ApiRequest apiRequest = JsonUtils.toObject(requestData, ApiRequest.class);
+		// 解析出requestHead
+		ApiRequest apiRequest = null;
+		try {
+			apiRequest = JsonUtils.toObject(requestData, ApiRequest.class);
+		} catch (Exception e) {
+			logger.error("对象序列化失败", e);
+		}
 		if (apiRequest == null) {
+			logger.info("请求数据json序列化后对象为空");
 			serviceResult = new ServiceResult();
 			serviceResult.setCode("402");
-			serviceResult.setMessage("请求数据json序列化后对象为空");
+			serviceResult.setMessage("请求数据格式错误");
 
 			return serviceResult;
 		}
 
 		// 验证请求头
 		RequestHead requestHead = apiRequest.getRequestHead();
-		serviceResult = validRequestHead(requestHead);
+		serviceResult = requestHeadValidator.valid(requestHead);
 		if (serviceResult != null) {
 			return serviceResult;
 		}
 
 		String apiNo = requestHead.getApiNo();
 		String version = requestHead.getVersion();
-
-		// 验证apiNo是否存在
-		if (!apiRegister.isValidMethod(apiNo)) {
-			logger.info("apiNo无效");
-			serviceResult = new ServiceResult();
-			serviceResult.setCode("402");
-			serviceResult.setMessage("apiNo无效");
-
-			return serviceResult;
-		}
-
-		// 验证接口版本号是否正确
-		if (!apiRegister.isValidVersion(apiNo, version)) {
-			logger.info("接口不存在该版本号");
-			serviceResult = new ServiceResult();
-			serviceResult.setCode("402");
-			serviceResult.setMessage("接口不存在该版本号");
-
-			return serviceResult;
-		}
-
-		// 验证接口对应的版本号是否失效
-		if (apiRegister.isVersionObsoleted(apiNo, version)) {
-			logger.info("接口对应的版本号已失效");
-
-			serviceResult = new ServiceResult();
-			serviceResult.setCode("402");
-			serviceResult.setMessage("接口对应的版本号已失效");
-
-			return serviceResult;
-		}
-
 		ServiceMethodHandler serviceMethodHandler = apiRegister.getServiceMethodHandler(apiNo, version);
 
 		if (serviceMethodHandler.isHandlerMethodWithParameter()) {
@@ -151,53 +139,4 @@ public class ApiRouter implements ApplicationContextAware {
 
 		return serviceResult;
 	}
-
-	/**
-	 * 验证请求头
-	 * 
-	 * @param requestHead
-	 *            请求头
-	 * @return
-	 */
-	private ServiceResult validRequestHead(RequestHead requestHead) {
-		ServiceResult validResult = null;
-		if (requestHead == null) {
-			validResult = new ServiceResult();
-			validResult.setData("请求头为空");
-
-			return validResult;
-		}
-		if (StringUtils.isEmpty(requestHead.getAppNo())) {
-			logger.info("appNo为空");
-
-			validResult = new ServiceResult();
-			validResult.setData("appNo为空");
-
-			return validResult;
-		}
-
-		// 验证appNo是否正确(目前可先配置到配置文件)
-
-		if (StringUtils.isEmpty(requestHead.getApiNo())) {
-			logger.info("apiNo为空");
-
-			validResult = new ServiceResult();
-			validResult.setData("apiNo为空");
-
-			return validResult;
-		}
-
-		// 版本号暂时不做验证
-		if (StringUtils.isEmpty(requestHead.getVersion())) {
-			logger.info("版本号为空");
-
-			validResult = new ServiceResult();
-			validResult.setData("版本号为空");
-
-			return validResult;
-		}
-
-		return validResult;
-	}
-
 }

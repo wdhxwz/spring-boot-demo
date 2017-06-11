@@ -10,6 +10,15 @@ import java.io.Serializable;
 public class ServiceResult implements Serializable{
 	private static final long serialVersionUID = -5422771226114393067L;
 
+	public static ServiceResult  build(String code,String message){
+		ServiceResult result = new ServiceResult();
+		result.code = code;
+		result.message = message;
+		
+		return result;
+	}
+	
+	
 	/**
 	 * 响应码
 	 */

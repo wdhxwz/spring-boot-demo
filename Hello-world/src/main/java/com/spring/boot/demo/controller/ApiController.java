@@ -16,7 +16,7 @@ public class ApiController {
 	ApiRouter apiRouter;
 
 	@RequestMapping()
-	public ServiceResult request(@RequestBody String data) {
+	public ServiceResult request(@RequestBody(required = false) String data) {
 		return apiRouter.service(data);
 	}
 }

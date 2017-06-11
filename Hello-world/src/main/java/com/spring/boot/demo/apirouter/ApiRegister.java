@@ -5,6 +5,8 @@ package com.spring.boot.demo.apirouter;
 
 import java.util.Map;
 
+import org.springframework.context.ApplicationContext;
+
 /**
  * 接口路由服务注册器
  * 

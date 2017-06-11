@@ -18,7 +18,7 @@ public class RequestHead implements Serializable{
 	/**
 	 * 应用编号
 	 */
-	private String appNo;
+	private String appKey;
 	
 	/**
 	 *  接口编号
@@ -33,12 +33,12 @@ public class RequestHead implements Serializable{
 		this.version = version;
 	}
 
-	public String getAppNo() {
-		return appNo;
+	public String getAppKey() {
+		return appKey;
 	}
 
-	public void setAppNo(String appNo) {
-		this.appNo = appNo;
+	public void setAppKey(String appKey) {
+		this.appKey = appKey;
 	}
 
 	public String getApiNo() {
