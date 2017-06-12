@@ -1,6 +1,8 @@
 package com.spring.boot.demo.service.test;
 
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -31,4 +33,16 @@ public class MybatisTest extends TestBase {
 		Assert.assertNotNull(students);
 	}
 
+	@Test
+	public void insertTest() {
+
+		Student student = new Student();
+		student.setBirthday(new Date());
+		student.setEmail("1366678737@qq.com");
+		student.setId(UUID.randomUUID().toString());
+		student.setName("insert");
+		int result = studentMapper.insert(student);
+
+		Assert.assertTrue(result == 1);
+	}
 }
