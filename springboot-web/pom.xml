@@ -8,8 +8,8 @@
 		<artifactId>springboot.demo</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>spring-boot</artifactId>
-	<name>spring-boot</name>
+	<artifactId>springboot-web</artifactId>
+	<name>springboot-web</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
