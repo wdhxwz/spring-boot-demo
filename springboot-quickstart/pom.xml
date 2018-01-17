@@ -21,6 +21,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
+        <!-- 开发者工具 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 
     <build>
@@ -43,6 +50,9 @@
                 <configuration>
                     <mainClass>${start-class}</mainClass>
                     <layout>ZIP</layout>
+
+                    <!-- 自动重启 -->
+                    <fork>true</fork>
                 </configuration>
                 <executions>
                     <execution>
