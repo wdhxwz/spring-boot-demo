@@ -1,5 +1,7 @@
 package com.wangdh.springboot.quickstart.controller;
 
+import com.wangdh.springboot.quickstart.models.MyBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,8 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class Example {
+    @Autowired
+    MyBean myBean;
+
     @RequestMapping("/")
     public  String home(){
-        return "Hello Spring Boot 22333";
+        return "Hello " + myBean.getName() +"\n" + myBean.getAppName() + "\n" + myBean.getAppDescription();
     }
 }
