@@ -19,6 +19,12 @@ public class MyBean {
     @Value("${app.description}")
     private String appDescription;
 
+    @Value("${db}")
+    private String db;
+
+    @Value("${mq}")
+    private String mq;
+
     public String getName() {
         return name;
     }
@@ -29,5 +35,13 @@ public class MyBean {
 
     public  String getAppDescription(){
         return appDescription;
+    }
+
+    public String getDb(){
+        return db;
+    }
+
+    public String getMq(){
+        return mq;
     }
 }
