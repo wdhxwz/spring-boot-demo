@@ -1,13 +1,17 @@
 package com.wangdh.springboot.quickstart;
 
+import com.wangdh.springboot.quickstart.models.AppInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 
 /**
  * Hello world!
@@ -15,6 +19,10 @@ import org.springframework.context.annotation.Configuration;
 @EnableAutoConfiguration
 @ComponentScan
 @Configuration
+
+// 可以通过在AppInfo类上添加 @Component 注解替代下面的方式
+// @EnableConfigurationProperties(value = { AppInfo.class })
+// @PropertySource(value="test.properties")
 public class App {
     private static final Logger logger = LoggerFactory.getLogger(App.class);
 

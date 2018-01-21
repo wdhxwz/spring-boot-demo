@@ -6,6 +6,7 @@
     <id>package</id>
 
     <!--
+    指定打包类型,指定多个时会生成多个目标文件，可用的打包类型如下:
     zip
     tar
     tar.gz
@@ -16,11 +17,19 @@
     -->
     <formats>
         <format>dir</format>
+        <format>zip</format>
     </formats>
-    <includeBaseDirectory>true</includeBaseDirectory>
+
+    <!-- 指定是否包含打包层目录（比如finalName是output，当值为true，所有文件被放在output目录下，否则直接放在包的根目录下） -->
+    <includeBaseDirectory>false</includeBaseDirectory>
+
+    <!-- 指定要包含的文件集，可以定义多个fileSet -->
     <fileSets>
         <fileSet>
+            <!-- 指定要包含的目录 -->
             <directory>src/main/bin</directory>
+
+            <!-- 指定当前要包含的目录的输出地点 -->
             <outputDirectory>/bin</outputDirectory>
         </fileSet>
         <fileSet>
@@ -35,13 +44,24 @@
             </includes>
         </fileSet>
     </fileSets>
+
+
+
     <dependencySets>
         <dependencySet>
             <outputDirectory>lib</outputDirectory>
             <scope>runtime</scope>
+
+            <!-- 排除工程自身生成的jar -->
+            <useProjectArtifact>false</useProjectArtifact>
+
+            <!-- 排除特定jar -->
             <excludes>
                 <exclude>${groupId}:${artifactId}</exclude>
             </excludes>
+
+            <!-- 可以控制依赖包是否在打包进来时是否解开 -->
+            <unpack>false</unpack>
         </dependencySet>
     </dependencySets>
 </assembly>

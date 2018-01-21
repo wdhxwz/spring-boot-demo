@@ -1,5 +1,7 @@
 package com.wangdh.springboot.quickstart.controller;
 
+import com.wangdh.springboot.quickstart.models.AppInfo;
+import com.wangdh.springboot.quickstart.models.Company;
 import com.wangdh.springboot.quickstart.models.MyBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,15 +27,30 @@ public class Example {
                 + myBean.getAppName() + "\n"
                 + myBean.getAppDescription()+ "\n"
                 + myBean.getDb()+ "\n"
-                + myBean.getMq()+ "\n";
+                + myBean.getMq()+ "\n"
+                + myBean.getCompany()+ "\n";
     }
 
     @RequestMapping("/json")
     public Object json(){
-        Map<String,String> map = new HashMap<>(4);
+        Map<String,String> map = new HashMap<String,String>(4);
         map.put("name","wangdh");
         map.put("age","26-2");
 
         return map;
+    }
+
+    @Autowired
+    private AppInfo appInfo;
+    @RequestMapping("/appInfo")
+    public Object getAppInfo(){
+        return  appInfo;
+    }
+
+    @Autowired
+    private Company company;
+    @RequestMapping("/getCompany")
+    public Company getCompany(){
+        return  company;
     }
 }

@@ -25,6 +25,12 @@ public class MyBean {
     @Value("${mq}")
     private String mq;
 
+    @Value("${company}")
+    private String company;
+    public String getCompany(){
+        return company;
+    }
+
     public String getName() {
         return name;
     }
