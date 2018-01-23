@@ -28,7 +28,6 @@
         <fileSet>
             <!-- 指定要包含的目录 -->
             <directory>src/main/bin</directory>
-
             <!-- 指定当前要包含的目录的输出地点 -->
             <outputDirectory>/bin</outputDirectory>
         </fileSet>

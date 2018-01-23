@@ -101,38 +101,63 @@
     <fileSets>
         <fileSet>
             <useDefaultExcludes/>
+            <!-- 设置输出目录相对于程序集根目录的目录 -->
             <outputDirectory/>
+            <!-- 指定需要包含的文件 -->
             <includes/>
+            <!-- 指定需要排除的文件 -->
             <excludes/>
+            <!-- 设置文件的模式，与UNIX权限类似Read = 4，Write = 2和Execute = 1，默认是0644 -->
             <fileMode/>
+            <!-- 设置目录的模式，与UNIX权限类似Read = 4，Write = 2和Execute = 1，默认是0755 -->
             <directoryMode/>
+            <!-- 指定要包含的目录 -->
             <directory/>
+            <!-- 设置文件的行结束符，可选的值有：keep(保持原有换行符)、unix、lf(\n换行符)、dos、windows、crlf(\r\n换行符) -->
             <lineEnding/>
+            <!-- 是否在复制文件时过滤符号，默认值false -->
             <filtered/>
         </fileSet>
     </fileSets>
     <!-- 指定在程序集中包含哪些单个文件 -->
     <files>
         <file>
+            <!-- 设置要包含的文件的绝对路径或相对路径 -->
             <source/>
+            <!-- 设置输出目录相对于程序集根目录的目录 -->
             <outputDirectory/>
+            <!-- 设置目标文件名。 默认是与源文件相同的名称。 -->
             <destName/>
+            <!-- 设置文件的模式，与UNIX权限类似Read = 4，Write = 2和Execute = 1，默认是0644 -->
             <fileMode/>
+            <!-- 设置文件的行结束符，可选的值有：keep(保持原有换行符)、unix、lf(\n换行符)、dos、windows、crlf(\r\n换行符) -->
             <lineEnding/>
+            <!-- 是否在复制文件时过滤，默认值false -->
             <filtered/>
         </file>
     </files>
     <!-- 指定要包含在程序集中的依赖关系 -->
     <dependencySets>
         <dependencySet>
+            <!-- 设置输出目录相对于程序集根目录的目录 -->
             <outputDirectory/>
+            <!-- 设置包含的jar包坐标，格式为：groupId：artifactId
+            或groupId：artifactId：type [：classifier]：version
+            或使用*通配符 -->
             <includes/>
+            <!-- 设置排除的jar包坐标 -->
             <excludes/>
+            <!-- 设置文件的模式，与UNIX权限类似Read = 4，Write = 2和Execute = 1，默认是0644 -->
             <fileMode/>
+            <!-- 设置目录的模式，与UNIX权限类似Read = 4，Write = 2和Execute = 1，默认是0755 -->
             <directoryMode/>
+            <!-- 是否使用严格过滤模式，默认false -->
             <useStrictFiltering/>
+            <!-- 设置此程序集中包含的所有依赖关系的映射模式 -->
             <outputFileNameMapping/>
+            <!-- 是否解压依赖包到输出目录，默认false -->
             <unpack/>
+            <!-- 对解压进行进一步配置 -->
             <unpackOptions>
                 <includes/>
                 <excludes/>
@@ -141,21 +166,34 @@
                 <useDefaultExcludes/>
                 <encoding/>
             </unpackOptions>
+            <!-- 设置依赖项范围，默认runtime -->
             <scope/>
+            <!-- 确定当前项目构建产生的发布包是否包含在这个依赖集中，默认true -->
             <useProjectArtifact/>
+            <!-- 确定在当前项目的构建产生的附加构件是否包含在这个依赖集中，默认false -->
             <useProjectAttachments/>
+            <!-- 是否使用传递依赖，默认true -->
             <useTransitiveDependencies/>
+            <!-- 是否按排除/包含模式过滤传递依赖，默认false -->
             <useTransitiveFiltering/>
         </dependencySet>
     </dependencySets>
     <!-- 指定要在程序集中包含哪些存储库文件 -->
     <repositories>
         <repository>
+            <!-- 设置输出目录相对于程序集根目录的目录 -->
             <outputDirectory/>
+            <!-- 设置包含的jar包坐标，格式为：groupId：artifactId
+            或groupId：artifactId：type [：classifier]：version
+            或使用*通配符 -->
             <includes/>
+            <!-- 设置排除的jar包坐标 -->
             <excludes/>
+            <!-- 设置文件的模式，与UNIX权限类似Read = 4，Write = 2和Execute = 1，默认是0644 -->
             <fileMode/>
+            <!-- 设置目录的模式，与UNIX权限类似Read = 4，Write = 2和Execute = 1，默认是0755 -->
             <directoryMode/>
+            <!-- 是否包含源数据，默认false  -->
             <includeMetadata/>
             <groupVersionAlignments>
                 <groupVersionAlignment>
@@ -164,6 +202,7 @@
                     <excludes/>
                 </groupVersionAlignment>
             </groupVersionAlignments>
+            <!-- 设置依赖范围，默认runtime -->
             <scope/>
         </repository>
     </repositories>

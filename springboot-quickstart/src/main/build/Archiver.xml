@@ -1,0 +1,74 @@
+<archive>
+    <!--
+    是否在归档包的路径META-INF/maven/${groupId}/${artifactId}包含下面两个文件：
+    pom.xml
+    pom.properties
+    默认值：true
+     -->
+    <addMavenDescriptor/>
+    <!-- 是否进行压缩，默认值：true -->
+    <compress/>
+    <!-- 是否强制重新创建存档，默认值：true -->
+    <forced/>
+    <!-- 创建的归档文件是否包含INDEX.LIST文件，默认值是false。 -->
+    <index/>
+    <!-- -->
+    <manifest>
+        <!-- 是否创建一个Class-Path清单条目，默认false -->
+        <addClasspath/>
+        <!--
+        如果设置为true，则manifest将会包含下面内容，默认false
+        Implementation-Title: ${project.name}
+        Implementation-Version: ${project.version}
+        Implementation-Vendor-Id: ${project.groupId}
+        Implementation-Vendor: ${project.organization.name}
+        Implementation-URL: ${project.url}
+        -->
+        <addDefaultImplementationEntries/>
+        <!--
+         如果设置为true，则manifest将会包含下面内容，默认false
+         Specification-Title: ${project.name}
+         Specification-Version: ${project.artifact.selectedVersion.majorVersion}.${project.artifact.selectedVersion.minorVersion}
+         Specification-Vendor: ${project.organization.name}
+         -->
+        <addDefaultSpecificationEntries/>
+        <!-- 是否创建扩展列表清单条目,默认值是false。 -->
+        <addExtensions/>
+        <!-- 格式化Class-Path时需要使用的布局类型，有效值为:simple/repository/custom
+        默认值：simple
+        -->
+        <classpathLayoutType/>
+        <!-- 是否使用repository进行格式化，默认false -->
+        <classpathMavenRepositoryLayout/>
+        <!-- 作为所有Class-Path前缀的文本,默认值"" -->
+        <classpathPrefix/>
+        <!-- -->
+        <customClasspathLayout/>
+        <!-- 设置manifest清单里面的Main-Class属性 -->
+        <mainClass/>
+        <!-- 设置manifest清单里面的Package属性 -->
+        <packageName/>
+        <!-- 是否使用唯一的时间戳快照版本而不是-SNAPSHOT版本，默认true -->
+        <useUniqueVersions/>
+    </manifest>
+    <!-- 添加到manifest清单的key/value对 -->
+    <manifestEntries>
+        <key>value</key>
+    </manifestEntries>
+    <!-- 定义自己的manifest文件 -->
+    <manifestFile/>
+    <manifestSections>
+        <!-- -->
+        <manifestSection>
+            <!-- section的名字 -->
+            <name/>
+            <!-- 添加到manifest清单文件的key/value对 -->
+            <manifestEntries>
+                <!-- -->
+                <key>value</key>
+            </manifestEntries>
+        </manifestSection>
+    </manifestSections>
+    <!-- 使用它来覆盖自动创建的pom.properties文件（只有在addMavenDescriptor设置为true的情况下） -->
+    <pomPropertiesFile/>
+</archive>
