@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -26,9 +26,9 @@ import java.util.List;
  * @date 2018-01-26
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-// @ContextConfiguration(classes ={RedisConfig.class})
+@ContextConfiguration(classes ={RedisConfig.class})
 @TestPropertySource(locations = "classpath:application.properties")
-@SpringBootTest(classes ={RedisConfig.class})
+//@SpringBootTest(classes ={RedisConfig.class})
 public class RedisTest {
     private static Logger logger = LoggerFactory.getLogger(RedisTest.class);
 
